@@ -8,8 +8,6 @@ on:
     paths:
       - 'include/IGame.hpp'
       - 'include/IGraphical.hpp'
-      - 'include/Event.hpp'
-      - 'include/Drawable.hpp'
 
 jobs:
   sync:
@@ -20,31 +18,28 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+
       - name: Clone destination repo
-        env:
-          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          git clone https://x-access-token:${SYNC_TOKEN}@github.com/EpitechPGE2-2025/G-OOP-400-NCE-4-1-arcade-4.git dest-repo
+          git clone git@github.com:EpitechPGE2-2025/G-OOP-400-NCE-4-1-arcade-4.git dest-repo
 
       - name: Copy interface files
         run: |
           mkdir -p dest-repo/include
           cp include/IGame.hpp      dest-repo/include/IGame.hpp
           cp include/IGraphical.hpp dest-repo/include/IGraphical.hpp
-          cp include/Event.hpp      dest-repo/include/Event.hpp
-          cp include/Drawable.hpp   dest-repo/include/Drawable.hpp
-
-
 
       - name: Commit and push
-        env:
-          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           cd dest-repo
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add include/IGame.hpp include/IGraphical.hpp include/Event.hpp include/Drawable.hpp
+          git add include/IGame.hpp include/IGraphical.hpp
 
           if git diff --cached --quiet; then
             echo "No changes to sync — interfaces are already up to date."
