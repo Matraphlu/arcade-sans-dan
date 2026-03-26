@@ -8,8 +8,6 @@ on:
     paths:
       - 'include/IGame.hpp'
       - 'include/IGraphical.hpp'
-      - 'include/Event.hpp'
-      - 'include/Drawable.hpp'
 
 jobs:
   sync:
@@ -23,7 +21,9 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+          ssh-private-key: |
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+            ${{ secrets.GIT_SSH_PRIVATE_KEY_5 }}
 
       - name: Clone destination repos
         run: |
@@ -35,12 +35,8 @@ jobs:
           mkdir -p dest-repo-4/include dest-repo-5/include
           cp include/IGame.hpp      dest-repo-4/include/IGame.hpp
           cp include/IGraphical.hpp dest-repo-4/include/IGraphical.hpp
-          cp include/Event.hpp      dest-repo-4/include/Event.hpp
-          cp include/Drawable.hpp   dest-repo-4/include/Drawable.hpp
           cp include/IGame.hpp      dest-repo-5/include/IGame.hpp
           cp include/IGraphical.hpp dest-repo-5/include/IGraphical.hpp
-          cp include/Event.hpp      dest-repo-5/include/Event.hpp
-          cp include/Drawable.hpp   dest-repo-5/include/Drawable.hpp
 
       - name: Commit and push
         run: |
@@ -52,7 +48,7 @@ jobs:
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
 
-            git add include/IGame.hpp include/IGraphical.hpp include/Event.hpp include/Drawable.hpp
+            git add include/IGame.hpp include/IGraphical.hpp
 
             if git diff --cached --quiet; then
               echo "No changes to sync in $repo"
