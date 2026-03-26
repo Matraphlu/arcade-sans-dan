@@ -18,4 +18,5 @@ enum class Event {
     Restart,
     Menu,
     Quit
+    caca
 };
