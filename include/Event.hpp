@@ -18,5 +18,5 @@ enum class Event {
     Restart,
     Menu,
     Quit
-    cacaaaa
+    cacaaaaa
 };
