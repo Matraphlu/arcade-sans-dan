@@ -25,33 +25,41 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
 
-      - name: Clone destination repo
+      - name: Clone destination repos
         run: |
-          git clone git@github.com:EpitechPGE2-2025/G-OOP-400-NCE-4-1-arcade-4.git dest-repo
+          git clone git@github.com:EpitechPGE2-2025/G-OOP-400-NCE-4-1-arcade-4.git dest-repo-4
+          git clone git@github.com:EpitechPGE2-2025/G-OOP-400-NCE-4-1-arcade-5.git dest-repo-5
 
       - name: Copy interface files
         run: |
-          mkdir -p dest-repo/include
-          cp include/IGame.hpp      dest-repo/include/IGame.hpp
-          cp include/IGraphical.hpp dest-repo/include/IGraphical.hpp
-          cp include/Event.hpp      dest-repo/include/Event.hpp
-          cp include/Drawable.hpp   dest-repo/include/Drawable.hpp
+          mkdir -p dest-repo-4/include dest-repo-5/include
+          cp include/IGame.hpp      dest-repo-4/include/IGame.hpp
+          cp include/IGraphical.hpp dest-repo-4/include/IGraphical.hpp
+          cp include/Event.hpp      dest-repo-4/include/Event.hpp
+          cp include/Drawable.hpp   dest-repo-4/include/Drawable.hpp
+          cp include/IGame.hpp      dest-repo-5/include/IGame.hpp
+          cp include/IGraphical.hpp dest-repo-5/include/IGraphical.hpp
+          cp include/Event.hpp      dest-repo-5/include/Event.hpp
+          cp include/Drawable.hpp   dest-repo-5/include/Drawable.hpp
 
       - name: Commit and push
         run: |
-          cd dest-repo
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add include/IGame.hpp include/IGraphical.hpp include/Event.hpp include/Drawable.hpp
-
-          if git diff --cached --quiet; then
-            echo "No changes to sync — interfaces are already up to date."
-            exit 0
-          fi
-
           COMMIT_SHA=${{ github.sha }}
           COMMIT_MSG=${{ github.event.head_commit.message }}
-          git commit -m "chore: sync interfaces from arcade-sans-dan (${COMMIT_SHA::7}): ${COMMIT_MSG}"
 
-          git push origin HEAD
+          for repo in dest-repo-4 dest-repo-5; do
+            cd $repo
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            git add include/IGame.hpp include/IGraphical.hpp include/Event.hpp include/Drawable.hpp
+
+            if git diff --cached --quiet; then
+              echo "No changes to sync in $repo"
+            else
+              git commit -m "chore: sync interfaces from arcade-sans-dan (${COMMIT_SHA::7}): ${COMMIT_MSG}"
+              git push origin HEAD
+            fi
+
+            cd ..
+          done
