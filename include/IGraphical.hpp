@@ -17,5 +17,5 @@ public:
     virtual void clear() = 0;
     virtual void display() = 0;
     virtual Event pollEvent() = 0;
-    virtual void draw(const std::vector<Drawable>& drawables) = 0;aleeed
+    virtual void draw(const std::vector<Drawable>& drawables) = 0;
 };
