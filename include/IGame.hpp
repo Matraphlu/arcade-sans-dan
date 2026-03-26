@@ -26,7 +26,7 @@ public:
     virtual int  getScore()   const = 0;
     virtual bool isGameOver() const = 0;
 
-    // Identity — used by the core to list available games and display scores
+    // Identity — used by the core to list available games and disaplay scores
     virtual std::string getName() const = 0;
 };
 
