@@ -45,8 +45,8 @@ jobs:
             exit 0
           fi
 
-          COMMIT_SHA="${{ github.sha }}"
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          COMMIT_SHA=${{ github.sha }}
+          COMMIT_MSG=${{ github.event.head_commit.message }}
           git commit -m "chore: sync interfaces from arcade-sans-dan (${COMMIT_SHA::7}): ${COMMIT_MSG}"
 
           git push origin HEAD
