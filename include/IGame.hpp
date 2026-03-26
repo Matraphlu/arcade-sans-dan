@@ -6,27 +6,17 @@
 */
 
 #pragma once
-#include <string>
-
-class IGraphical;
+#include <vector>
+#include "Event.hpp"
+#include "Drawable.hpp"
 
 class IGame {
 public:
     virtual ~IGame() = default;
-
-    // Lifecycle
-    virtual void init()  = 0;  // called once when the library is loaded
-    virtual void reset() = 0;  // called to restart the game without reloading
-
-    // Game loop — input is a KeyCode value from IGraphical.hpp
-    virtual void update(int input) = 0;
-    virtual void render(IGraphical *gfx) = 0;
-
-    // State
-    virtual int  getScore()   const = 0;
+    virtual void init() = 0;
+    virtual void reset() = 0;
+    virtual void update(Event event) = 0;
     virtual bool isGameOver() const = 0;
-
-    // Identity — used by the core to list available games and disaplay scores
-    virtual std::string getName() const = 0;
+    virtual int getScore() const = 0;
+    virtual std::vector<Drawable> getDrawables() const = 0;
 };
-
