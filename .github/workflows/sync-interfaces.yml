@@ -8,6 +8,8 @@ on:
     paths:
       - 'include/IGame.hpp'
       - 'include/IGraphical.hpp'
+      - 'include/Event.hpp'
+      - 'include/Drawable.hpp'
 
 jobs:
   sync:
@@ -32,6 +34,8 @@ jobs:
           mkdir -p dest-repo/include
           cp include/IGame.hpp      dest-repo/include/IGame.hpp
           cp include/IGraphical.hpp dest-repo/include/IGraphical.hpp
+          cp include/Event.hpp      dest-repo/include/Event.hpp
+          cp include/Drawable.hpp   dest-repo/include/Drawable.hpp
 
       - name: Commit and push
         run: |
@@ -39,7 +43,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add include/IGame.hpp include/IGraphical.hpp
+          git add include/IGame.hpp include/IGraphical.hpp include/Event.hpp include/Drawable.hpp
 
           if git diff --cached --quiet; then
             echo "No changes to sync — interfaces are already up to date."
