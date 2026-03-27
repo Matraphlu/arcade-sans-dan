@@ -18,5 +18,5 @@ public:
     virtual void update(Event event) = 0;
     virtual bool isGameOver() const = 0;
     virtual int getScore() const = 0;
-    virtual std::vector<Drawable> getDrawables() const = 0;
+    virtual std::vector<Drawable> getDrawables() const = 0;z
 };
