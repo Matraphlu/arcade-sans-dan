@@ -1,25 +1,30 @@
 /*
 ** EPITECH PROJECT, 2025
-** G-OOP-400-NCE-4-1-arcade-4
-** File description:
 ** Drawable.hpp
 */
 
-#pragma once
-#include <string>
+#ifndef DRAWABLE_HPP_
+    #define DRAWABLE_HPP_
 
-enum class TileType {
-    Empty,
-    Wall,
-    SnakeHead,
-    SnakeBody,
-    Food,
+#include <string>
+#include <unordered_map>
+
+enum class DrawableType {
+    Rectangle,
+    Sprite,
     Text
 };
 
 struct Drawable {
-    TileType type;
-    int x;
-    int y;
+    DrawableType type;
+    float x = 0;
+    float y = 0;
+    float width = 1;
+    float height = 1;
+    std::string asset;
     std::string text;
+    int color = 0;
+    std::unordered_map<std::string, std::string> props;
 };
+
+#endif // DRAWABLE_HPP_
