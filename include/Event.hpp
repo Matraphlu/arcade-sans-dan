@@ -5,7 +5,9 @@
 ** Event.hpp
 */
 
-#pragma once
+#ifndef EVENT_HPP_
+    #define EVENT_HPP_
+
 enum class Event {
     None,
     Up,
@@ -19,3 +21,5 @@ enum class Event {
     Menu,
     Quit
 };
+
+#endif // EVENT_HPP_

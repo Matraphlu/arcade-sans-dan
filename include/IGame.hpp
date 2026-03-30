@@ -5,7 +5,9 @@
 ** IGame.hpp
 */
 
-#pragma once
+#ifndef IGAME_HPP_
+    #define IGAME_HPP_
+
 #include <vector>
 #include "Event.hpp"
 #include "Drawable.hpp"
@@ -20,3 +22,5 @@ public:
     virtual int getScore() const = 0;
     virtual std::vector<Drawable> getDrawables() const = 0;
 };
+
+#endif // IGAME_HPP_

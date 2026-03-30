@@ -5,7 +5,9 @@
 ** IGraphical.hpp
 */
 
-#pragma once
+#ifndef IGRAPHICAL_HPP_
+    #define IGRAPHICAL_HPP_
+
 #include <vector>
 #include "Event.hpp"
 #include "Drawable.hpp"
@@ -19,3 +21,5 @@ public:
     virtual Event pollEvent() = 0;
     virtual void draw(const std::vector<Drawable>& drawables) = 0;
 };
+
+#endif // IGRAPHICAL_HPP_
