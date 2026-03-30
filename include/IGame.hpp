@@ -21,6 +21,8 @@ public:
     virtual bool isGameOver() const = 0;
     virtual int getScore() const = 0;
     virtual std::vector<Drawable> getDrawables() const = 0;
+    virtual std::string getNextGame() const {return "";}
+    virtual std::string getNextGraphic() const {return "";}
 };
 
 #endif // IGAME_HPP_
