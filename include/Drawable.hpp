@@ -5,17 +5,22 @@
 ** Drawable.hpp
 */
 
-#ifndef DRAWABLE_HPP_
-    #define DRAWABLE_HPP_
+#ifndef Drawable_HPP
+    #define Drawable_HPP
 
 #include <string>
 
 enum class TileType {
     Empty,
     Wall,
-    SnakeHead,
-    SnakeBody,
-    Food,
+
+    Player,
+    Enemy,
+
+    Collectible,
+    Obstacle,
+    Projectile,
+
     Text
 };
 
@@ -26,4 +31,4 @@ struct Drawable {
     std::string text;
 };
 
-#endif // DRAWABLE_HPP_
+#endif /* Drawable_HPP */
