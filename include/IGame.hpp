@@ -12,7 +12,7 @@
 #include "Event.hpp"
 #include "Drawable.hpp"
 
-class IGame {z
+class IGame {
 public:
     virtual ~IGame() = default;
     virtual void init() = 0;
