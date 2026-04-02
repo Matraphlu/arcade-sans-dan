@@ -29,6 +29,7 @@ struct Drawable {
     int x;
     int y;
     std::string text;
+    std::string asset;
 };
 
 #endif /* Drawable_HPP */
